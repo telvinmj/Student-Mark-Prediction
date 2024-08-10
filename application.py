@@ -5,13 +5,14 @@ import pandas as pd
 
 from sklearn.preprocessing import StandardScaler
 from src.pipeline.predict_pipeline import CustomData,PredictPipeline
-app=Flask(__name__)
+application = Flask(__name__)
 
-port = 5000
+app = application
+port = 5001
 
 @app.route("/")
 def index():
-    return render_template('index.html')
+    return render_template('home.html')
 
 @app.route('/predictdata',methods=['GET','POST'])
 def predict_datapoint():
@@ -44,4 +45,4 @@ def predict_datapoint():
 if __name__ == "__main__":
     if os.environ.get("WERKZEUG_RUN_MAIN") == "true":
         print(f'Server running at http://127.0.0.1:{port}/')
-    app.run(debug=True, port=port)
+    app.run(host="0.0.0.0", port=port)
