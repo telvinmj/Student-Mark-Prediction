@@ -8,7 +8,7 @@ from src.pipeline.predict_pipeline import CustomData,PredictPipeline
 application = Flask(__name__)
 
 app = application
-port = 5001
+
 
 @app.route("/")
 def index():
@@ -43,6 +43,7 @@ def predict_datapoint():
 
 
 if __name__ == "__main__":
+    port = 5000
     if os.environ.get("WERKZEUG_RUN_MAIN") == "true":
         print(f'Server running at http://127.0.0.1:{port}/')
     app.run(host="0.0.0.0", port=port)
