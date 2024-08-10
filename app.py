@@ -1,3 +1,4 @@
+import os
 from flask import Flask,request,render_template
 import numpy as np
 import pandas as pd
@@ -6,7 +7,7 @@ from sklearn.preprocessing import StandardScaler
 from src.pipeline.predict_pipeline import CustomData,PredictPipeline
 app=Flask(__name__)
 
-
+port = 5000
 
 @app.route("/")
 def index():
@@ -38,5 +39,9 @@ def predict_datapoint():
         print("after Prediction")
         return render_template('home.html',results=results[0])
     
-if __name__=="__main__":
-    app.run(debug=True,port=5000)
+
+
+if __name__ == "__main__":
+    if os.environ.get("WERKZEUG_RUN_MAIN") == "true":
+        print(f'Server running at http://127.0.0.1:{port}/')
+    app.run(debug=True, port=port)
